@@ -122,7 +122,7 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 **GET /projects/{id}/repository/commits**
 
 1. create a project 
-2. get the project commits with length of parameter 'ref_name' is too long
+2. get the project commits with length of parameter 'ref_name' is too long and has special characters ':'
 
 for example:
 ```
@@ -132,7 +132,7 @@ data:
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
 ```
-Sending: GET server_host/api/v4/projects/2/repository/commits?ref_name=longlongstring
+Sending: GET server_host/api/v4/projects/2/repository/commits?ref_name=email:1@gmail.com
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
@@ -236,6 +236,7 @@ this part list the Bugs we found by foREST ,
 | 2021-7-4 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | DELETE/PUT/GET  /groups/{id}/custom_attributes/{key} |
 | 2021-7-4 | WordPress |  | unsubmitted | POST  /categories |
 | 2021-11-4| Gitlab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346563) | submitted | POST projects/{id}/fork/{forked_from_id} |
+
 
 
 ## RESTler randomwalk mode
