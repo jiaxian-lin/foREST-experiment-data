@@ -4,12 +4,32 @@
 ### gitlab group
 #### foREST
 
-POST /groups/{id}/hooks  
-DELETE /groups/{id}
+**POST /groups/{id}/hooks**    
+**DELETE /groups/{id}**
 
 #### EvoMaster
 
-GET /api/v4/groups/{id}/subgroups ------ parameter 'all_avail' and 'able_statistics' Simultaneously
+**GET /api/v4/groups/{id}/subgroups**
+
+1. create a groups A
+2. get A's subgroups with parameter 'all_avail' and 'statistics'
+
+for example:
+
+```
+Sending: POST server_host/api/v4/group?name=a&path=b
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 201 response : {"group_id": 2}
+```
+
+```
+Sending: GET server_host/api/v4/group/2/subgroups?all_available=false&statistics=true
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
+```
+
 
 #### RESTler
 
@@ -19,10 +39,14 @@ No Bug found
 
 #### foREST
 
-**POST /projects.** send a request with the optional parameter 'use_custom_template',for example:  
+**POST /projects.** 
+
+1. create a project with the optional parameter 'use_custom_template'
+
+for example:
 ```
 Sending: POST server_host/api/v4/projects?name=Administrator   
-API_id: 0 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer mbz3FKZTFfLoyMBm515E'}  
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data: {"use_custom_template": "False"}  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
@@ -32,6 +56,7 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 2. create a project B 
 3. project B fork project A
 4. project A fork project B  
+
 for example:
 ```
 Sending: POST server_host/api/v4/projects?name=A
@@ -57,7 +82,8 @@ header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}
 data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
-POST /projects/{id}/share      
+
+**POST /projects/{id}/share**      
 
 #### EvoMaster
 
@@ -65,16 +91,55 @@ No Bug found
 
 #### RESTler
 
-POST /projects ------ with the parameter 'use_custom_template'  
-POST /api/v4/projects/user/1 ------ with the parameter 'use_custom_template'
+**POST /projects** 
+
+1. create a project with the optional parameter 'use_custom_template'
+
+for example:
+```
+Sending: POST server_host/api/v4/projects?name=Administrator   
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data: {"use_custom_template": "False"}  
+Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
+```
+
+**POST /api/v4/projects/user/id**
+
+1. create a project for special user with the optional parameter 'use_custom_template'
+
+for example:
+```
+Sending: POST server_host/api/v4/projects/user?name=Administrator   
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data: {"use_custom_template": "False"}  
+Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
+```
 
 ### gitlab commits
 
 #### foREST
 
-GET /projects/{id}/repository/commits ------ length of parameter 'ref_name' is too long  
-POST /projects/{id}/repository/commits  
-POST /projects/{id}/repository/branches
+**GET /projects/{id}/repository/commits**
+
+1. create a project 
+2. get the project commits with length of parameter 'ref_name' is too long
+
+for example:
+```
+Sending: POST server_host/api/v4/projects?name=A
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 201 response : {"project_id": 2}
+```
+```
+Sending: GET server_host/api/v4/projects/2/repository/commits?ref_name=longlongstring
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
+```
+
+**POST /projects/{id}/repository/commits**  
+**POST /projects/{id}/repository/branches**
 
 #### EvoMaster
 
@@ -90,10 +155,58 @@ the Bugs we found in WordPress caught by the server and returned the error reaso
 
 #### foREST
 
-DELETE /tags/{id} ------ use the correct id and the rest trash not supported  
-POST /users ------ use existed user email  
-DELETE /categories/{id} ------ use the correct id rest trash not supported
+**DELETE /tags/{id}**
+1. create a tag
+2. delete the tag
 
+for example:
+```
+Sending: POST server_host/wp-json/wp/v2/tags
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  {'name': 'a'}
+Received: 'HTTP/1.1 201 response : {"id": 2}
+```
+```
+Sending: DELETE server_host/wp-json/wp/v2/tags/2
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 501 response : {"code":"rest_trash_not_supported"} 
+```
+
+**POST /users** ------ use existed user email  
+1. create a user A
+2. create a user A again
+
+```
+Sending: POST /users server_host/wp-json/wp/v2/users 
+API_id: 35 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjExMi4xOTQiLCJpYXQiOjE2NDI1NjQ2NTQsIm5iZiI6MTY0MjU2NDY1NCwiZXhwIjoxNjQzMTY5NDU0LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.MSGSpG7__uMcW_TQwMOrsgoNvUX4ouOqLIARBUoT3to'}
+data: {"username": "A", "name": "jqn6eec4uz", "email": "5@BS.yoM", "password": "string", "description": "string"}
+Received: 'HTTP/1.1 201 response : {"id":"1"}
+```
+```
+Sending: POST /users server_host/wp-json/wp/v2/users 
+API_id: 35 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjExMi4xOTQiLCJpYXQiOjE2NDI1NjQ2NTQsIm5iZiI6MTY0MjU2NDY1NCwiZXhwIjoxNjQzMTY5NDU0LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.MSGSpG7__uMcW_TQwMOrsgoNvUX4ouOqLIARBUoT3to'}
+data: {"username": "A", "name": "jqn6eec4uz", "email": "5@BS.yoM", "password": "string", "description": "string"}
+Received: 'HTTP/1.1 500 response : {"code":"existing_user_login"}
+```
+
+**DELETE /categories/{id}** ------ use the correct id rest trash not supported
+1. create a categories
+2. delete the categories
+
+for example:
+```
+Sending: POST server_host/wp-json/wp/v2/categories
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  {'name': 'a'}
+Received: 'HTTP/1.1 201 response : {"id": 2}
+```
+```
+Sending: DELETE server_host/wp-json/wp/v2/tags/2
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 501 response : {"code":"rest_trash_not_supported"} 
+```
 #### EvoMaster
 
 No BUG found
