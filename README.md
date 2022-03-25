@@ -46,13 +46,13 @@ data:
 Received: 'HTTP/1.1 201 response : {"project_id": 3}
 ```
 ```
-Sending: POST server_host/api/v4/projects/2/fork/1 
+Sending: POST server_host/api/v4/projects/2/fork/3 
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  
 Received: 'HTTP/1.1 201 response : {"message":"success"} 
 ```
 ```
-Sending: POST server_host/api/v4/projects/1/fork/2
+Sending: POST server_host/api/v4/projects/3/fork/2
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
