@@ -236,3 +236,8 @@ this part list the Bugs we found by foREST ,
 | 2021-7-4 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | DELETE/PUT/GET  /groups/{id}/custom_attributes/{key} |
 | 2021-7-4 | WordPress |  | unsubmitted | POST  /categories |
 | 2021-11-4| Gitlab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346563) | submitted | POST projects/{id}/fork/{forked_from_id} |
+
+
+## RESTler randomwalk mode
+![randomwalk-6h](https://user-images.githubusercontent.com/71680354/160048141-4fb2b6af-d44d-4ff0-b6c7-c597d41778c0.png)
+![randomwalk-30min](https://user-images.githubusercontent.com/71680354/160048216-5b284ba1-e2f8-4dec-b7da-dd1c9a5db918.png)
