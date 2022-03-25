@@ -36,7 +36,7 @@ class Tool:
         cur_path = os.path.dirname(os.path.realpath(__file__))  # log_path是存放日志的路径
         path = os.path.join(os.path.dirname(cur_path), './log/api_list')
         if not os.path.exists(path):
-            os.mkdir(path)  # 如果不存在这个logs文件夹，就自动创建一个
+            os.mkdir(path)
         jst = json.dumps(open_api_list, default=lambda o: o.__dict__, indent=4)
         if not os.path.isfile(path + '/' + file_name + '.json'):
             with open(path + '/' + file_name + '.json', 'w') as f:
@@ -49,7 +49,7 @@ class Tool:
         cur_path = os.path.dirname(os.path.realpath(__file__))  # log_path是存放日志的路径
         path = os.path.join(os.path.dirname(cur_path), './log/resource')
         if not os.path.exists(path):
-            os.mkdir(path)  # 如果不存在这个logs文件夹，就自动创建一个
+            os.mkdir(path)
         jst = json.dumps(resource_pool, default=lambda o: o.__dict__, indent=4)
         if not os.path.isfile(path + '/' + file_name + '.json'):
             with open(path + '/' + file_name + '.json', 'w') as f:
@@ -60,7 +60,7 @@ class Tool:
         path = os.path.join(os.path.dirname(cur_path), './log/no_reference_key')
         file_name = 'no_reference_key'
         if not os.path.exists(path):
-            os.mkdir(path)  # 如果不存在这个logs文件夹，就自动创建一个
+            os.mkdir(path)
         with open(path + '/' + file_name + '.json', 'w') as f:
             f.write(str(no_reference_key))
 
