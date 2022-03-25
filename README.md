@@ -20,18 +20,42 @@ No Bug found
 #### foREST
 
 **POST /projects.** send a request with the optional parameter 'use_custom_template',for example:  
+```
 Sending: POST server_host/api/v4/projects?name=Administrator   
 API_id: 0 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer mbz3FKZTFfLoyMBm515E'}  
 data: {"use_custom_template": "False"}  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
+```
+**POST /projects/{id}/fork/{forked_from_id}** 
 
-**POST /projects/{id}/fork/{forked_from_id}** Circular fork(include fork itself)  
+1. create a project A 
+2. create a project B 
+3. project B fork project A
+4. project A fork project B  
+for example:
+```
+Sending: POST server_host/api/v4/projects?name=A
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 201 response : {"project_id": 2}
+```
+```
+Sending: POST server_host/api/v4/projects?name=B
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 201 response : {"project_id": 3}
+```
+```
+Sending: POST server_host/api/v4/projects/2/fork/1 
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:  
+Received: 'HTTP/1.1 201 response : {"message":"success"} 
+```
 ```
 Sending: POST server_host/api/v4/projects/155/fork/18  
-header:{'Content-Type': 'application/json', 'Authorization': 'Bearer 5dXAjPraokbpHd5s3osy'}  
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
-% after project '18' fork project '155' and send this request will cause bugs
 ```
 POST /projects/{id}/share      
 
