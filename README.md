@@ -5,6 +5,7 @@
 #### foREST
 
 POST /groups/{id}/hooks 
+
 DELETE /groups/{id}
 
 #### EvoMaster
@@ -20,7 +21,9 @@ No Bug found
 #### foREST
 
 POST /projects                  with the parameter 'use_custom_template'
+
 POST /projects/{id}/fork/{forked_from_id}  Circular fork(include fork itself)
+
 POST /projects/{id}/share      
 
 #### EvoMaster
@@ -30,13 +33,17 @@ No Bug found
 #### RESTler
 
 POST /projects                        with the parameter 'use_custom_template'
+
 POST /api/v4/projects/user/1           with the parameter 'use_custom_template'
 
 ### gitlab commits
 
 #### foREST
+
 GET /projects/{id}/repository/commits    length of parameter 'ref_name' is too long
+
 POST /projects/{id}/repository/commits
+
 POST /projects/{id}/repository/branches
 
 #### EvoMaster
@@ -50,8 +57,11 @@ No BUG found
 ### WordPress
 
 #### foREST
+
 DELETE /tags/{id}         rest trash not supported
+
 POST /users               use existed user email
+
 DELETE /categories/{id    rest trash not supported
 
 #### EvoMaster
