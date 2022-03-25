@@ -1,16 +1,15 @@
 # foREST-experiment-data
 
-## all bugs found
+## experiment bugs found
 ### gitlab group
 #### foREST
 
-POST /groups/{id}/hooks 
-
+POST /groups/{id}/hooks  
 DELETE /groups/{id}
 
 #### EvoMaster
 
-GET /api/v4/groups/{id}/subgroups     parameter 'all_avail' and 'ablestatistics' Simultaneously
+GET /api/v4/groups/{id}/subgroups ------ parameter 'all_avail' and 'able_statistics' Simultaneously
 
 #### RESTler
 
@@ -20,10 +19,20 @@ No Bug found
 
 #### foREST
 
-POST /projects                  with the parameter 'use_custom_template'
+**POST /projects.** send a request with the optional parameter 'use_custom_template',for example:  
+Sending: POST server_host/api/v4/projects?name=Administrator   
+API_id: 0 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer mbz3FKZTFfLoyMBm515E'}  
+data: {"use_custom_template": "False"}  
+Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 
-POST /projects/{id}/fork/{forked_from_id}  Circular fork(include fork itself)
-
+**POST /projects/{id}/fork/{forked_from_id}** Circular fork(include fork itself)  
+```
+Sending: POST server_host/api/v4/projects/155/fork/18  
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer 5dXAjPraokbpHd5s3osy'}  
+data:  
+Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
+% after project '18' fork project '155' and send this request will cause bugs
+```
 POST /projects/{id}/share      
 
 #### EvoMaster
@@ -32,18 +41,15 @@ No Bug found
 
 #### RESTler
 
-POST /projects                        with the parameter 'use_custom_template'
-
-POST /api/v4/projects/user/1           with the parameter 'use_custom_template'
+POST /projects ------ with the parameter 'use_custom_template'  
+POST /api/v4/projects/user/1 ------ with the parameter 'use_custom_template'
 
 ### gitlab commits
 
 #### foREST
 
-GET /projects/{id}/repository/commits    length of parameter 'ref_name' is too long
-
-POST /projects/{id}/repository/commits
-
+GET /projects/{id}/repository/commits ------ length of parameter 'ref_name' is too long  
+POST /projects/{id}/repository/commits  
 POST /projects/{id}/repository/branches
 
 #### EvoMaster
@@ -56,13 +62,13 @@ No BUG found
 
 ### WordPress
 
+the Bugs we found in WordPress caught by the server and returned the error reason
+
 #### foREST
 
-DELETE /tags/{id}         rest trash not supported
-
-POST /users               use existed user email
-
-DELETE /categories/{id    rest trash not supported
+DELETE /tags/{id} ------ use the correct id and the rest trash not supported  
+POST /users ------ use existed user email  
+DELETE /categories/{id} ------ use the correct id rest trash not supported
 
 #### EvoMaster
 
@@ -74,6 +80,7 @@ No BUG found
 
 ## Bugs found in other APIs
 
+this part list the Bugs we found by foREST , 
 
 | Date | Project | Link | Status | Description |
 |---------|---------|---------|---------|---------|
