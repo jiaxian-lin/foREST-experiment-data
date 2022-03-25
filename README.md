@@ -52,7 +52,7 @@ data:
 Received: 'HTTP/1.1 201 response : {"message":"success"} 
 ```
 ```
-Sending: POST server_host/api/v4/projects/155/fork/18  
+Sending: POST server_host/api/v4/projects/1/fork/2
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
