@@ -130,14 +130,6 @@ data:
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
 
-**POST /projects/{id}/share**      
-
-### gitlab group
-#### foREST
-
-**POST /groups/{id}/hooks**    
-**DELETE /groups/{id}**
-
 ### gitlab commits
 
 #### foREST
