@@ -6,51 +6,82 @@ This repository is divided in two folders:
 2. `experiment data`:contains the experiments data and how to reproduce the experiment
 
 A summary of the contents of this page is as follows:
-1. [RESTler random-walk mode experiment](https://github.com/jiaxian-lin/foREST-experiment-data#restler-randomwalk-mode): This part shows the actual situation of RESTler's random walk mode
-2. [Summary of Bugs found by foREST](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#bugs-found-in-experiment-by-forest): This part shows the summary of bugs found by foREST
-3. [Bugs found in other APIs](https://github.com/jiaxian-lin/foREST-experiment-data#bugs-found-in-other-apis): This part shows the bugs found by foREST during testing
-4. [Experiment bugs found](https://github.com/jiaxian-lin/foREST-experiment-data#experiment-bugs-found): This part shows the bugs found by each tool during the experiment
+1. RESTler random-walk mode experiment: This part shows the actual situation of RESTler's random walk mode
+2. Summary of Bugs found by foREST: This part shows the summary of bugs found by foREST
+3. Bugs found in other APIs: This part shows the bugs found by foREST during testing
+4. Experiment bugs found: This part shows the bugs found by each tool during the experiment
 ## RESTler randomwalk mode experiment
 <img src="https://user-images.githubusercontent.com/71680354/160048141-4fb2b6af-d44d-4ff0-b6c7-c597d41778c0.png" width = "500" height = "400" align=center />
 <img src="https://user-images.githubusercontent.com/71680354/160048216-5b284ba1-e2f8-4dec-b7da-dd1c9a5db918.png" width = "500" height = "400" align=center />
 
 ## Bugs found in experiment by foREST
-| Project | Link | Description|
-| --------- | ---------| -------- |
-| GitLab-project | [detail](https://github.com/jiaxian-lin/foREST-experiment-data#forest-1) | POST /projects|
-| GitLab-project | [detail](https://github.com/jiaxian-lin/foREST-experiment-data#forest-1) | POST /projects/{id}/fork/{forked_from_id}|
-| GitLab-project | [detail](https://github.com/jiaxian-lin/foREST-experiment-data#forest-1)| POST /projects/{id}/share |
-| GitLab-group | [detail](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#gitlab-group) | POST /groups/{id}/hooks |
-| GitLab-group | [detail](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#gitlab-group) | DELETE /groups/{id} |
-| GitLab-commits | [detail](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#gitlab-commits) | GET /projects/{id}/repository/commits |
-| GitLab-commits | [detail](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#gitlab-commits) | POST /projects/{id}/repository/commits|
-| GitLab-commits | [detail](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#gitlab-commits) | POST /projects/{id}/repository/branches|
-| WordPress | [detail](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#wordpress) | DELETE /tags/{id} |
-| WordPress | [detail](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#wordpress) | POST /users |
-| WordPress | [detail](https://github.com/jiaxian-lin/foREST-experiment-data/edit/main/README.md#wordpress) | DELETE /categories/{id} |
-## Bugs found in other APIs by foREST
+| Project | Description|
+| --------- | -------- |
+| GitLab-project | POST /projects|
+| GitLab-project | POST /projects/{id}/fork/{forked_from_id}|
+| GitLab-project | POST /projects/{id}/share |
+| GitLab-group | POST /groups/{id}/hooks |
+| GitLab-group | DELETE /groups/{id} |
+| GitLab-commits | GET /projects/{id}/repository/commits |
+| GitLab-commits | POST /projects/{id}/repository/commits|
+| GitLab-commits | POST /projects/{id}/repository/branches|
+| WordPress | DELETE /tags/{id} |
+| WordPress | POST /users |
+| WordPress | DELETE /categories/{id} |
+## Some reported bugs found by foREST
 
 this part list the Bugs we found by foREST 
 
 | Project | Link | Status | Description |
 |---------|---------|---------|---------|
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) | submitted | POST  /hooks |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) | submitted | POST  /admin/clusters/add |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | POST  /clusters/{id}/metrics_dashboard/annotations/ |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | DELETE/PUT/GET  /users/{id}/custom_attributes/{key} |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | GET  /users/{id}/custom_attributes |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | POST  /projects/{id}/clusters/user |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) | submitted | POST  /projects/{id}/metrics/user_starred_dashboards |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | DELETE/POST  /projects/{id}/custom_attributes/{key} |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | POST  /projects/{id}/export | 
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | GET  /projects/{id}/custom_attributes |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | POST  /groups/{id}/clusters/user |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | GET /groups/{id}/custom_attributes |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | DELETE/PUT/GET  /groups/{id}/custom_attributes/{key} |
-| WordPress |  | unsubmitted | POST  /categories |
-| Gitlab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346563) | submitted | POST projects/{id}/fork/{forked_from_id} |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) | submitted | /hooks                                        POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) | submitted | /admin/clusters/add                           POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | /clusters/{id}/metrics_dashboard/annotations/ POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /users/{id}/custom_attributes/{key} DELETE/PUT/GET |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /users/{id}/custom_attributes                  GET |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360138) | submitted | /projects/{id}/environments                    GET | 
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360147) | submitted | /projects/{id}/services/github               DELETE|
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | /projects/{id}/clusters/user                  POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) | submitted | /projects/{id}/metrics/user_starred_dashboards POST|
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /projects/{id}/custom_attributes               GET |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /projects/{id}/custom_attributes/{key} GET/DELETE/POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | /projects/{id}/export                         POST | 
+| Gitlab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346563) | submitted | /projects/{id}/fork/{forked_from_id}          POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360312) | submitted | /projects/{id}/repository/commits             POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/356922) | submitted | /projects/{id}/repository/commits              GET |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360313) | submitted | /projects/{id}/repository/branches            POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | /groups/{id}/clusters/user                    POST |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /groups/{id}/custom_attributes                 GET |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /groups/{id}/custom_attributes/{key} DELETE/PUT/GET |
 
-## experiment bugs found
+## What are the characteristics of bugs found by foREST?
+We roughly divide the bugs we find into three categories
+
+- Function that are not supported by the system or have been removed (usually on locally deployed systems)
+  1. GET /groups/{id}/custom_attributes 
+  2. DELETE/PUT/GET /groups/{id}/custom_attributes/{key}
+  3. GET /projects/{id}/custom_attributes
+  4. GET /groups/{id}/custom_attributes
+  5. DELETE/PUT/GET /groups/{id}/custom_attributes/{key}
+  6. GET /projects/{id}/custom_attributes 
+  7. GET/DELETE/POST /projects/{id}/custom_attributes/{key}
+  8. GET /users/{id}/custom_attributes 
+  9. GET/DELETE/POST /users/{id}/custom_attributes/{key}
+- The input data type does not match the actual required type
+  1. POST /hooks
+  2. POST /projects/{id}/metrics/user_starred_dashboards
+  3. POST /admin/clusters/add   
+  4. POST /projects/{id}/clusters/user  
+  5. POST /projects/{id}/export  
+  6. POST /projects/{id}/clusters/user    
+  7. GET /projects/{id}/repository/commits
+  8. GET /projects/{id}/environments 
+- logical flaw
+  1. POST /projects/{id}/fork/{forked_from_id}
+  2. POST /projects/{id}/repository/commits
+  3. POST /projects/{id}/repository/branches
+  4. DELETE /projects/{id}/services/github  
+## Steps to reproduce some bugs
 ### gitlab project
 
 #### foREST
@@ -101,69 +132,11 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 
 **POST /projects/{id}/share**      
 
-#### EvoMaster
-
-No Bug found
-
-#### RESTler
-
-**POST /projects** 
-
-1. create a project with the optional parameter 'use_custom_template'
-
-for example:
-```
-Sending: POST server_host/api/v4/projects?name=Administrator   
-header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data: {"use_custom_template": "False"}  
-Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
-```
-
-**POST /api/v4/projects/user/id**
-
-1. create a project for special user with the optional parameter 'use_custom_template'
-
-for example:
-```
-Sending: POST server_host/api/v4/projects/user?name=Administrator   
-header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data: {"use_custom_template": "False"}  
-Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
-```
 ### gitlab group
 #### foREST
 
 **POST /groups/{id}/hooks**    
 **DELETE /groups/{id}**
-
-#### EvoMaster
-
-**GET /api/v4/groups/{id}/subgroups**
-
-1. create a groups A
-2. get A's subgroups with parameter 'all_avail' and 'statistics'
-
-for example:
-
-```
-Sending: POST server_host/api/v4/group?name=a&path=b
-header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
-Received: 'HTTP/1.1 201 response : {"group_id": 2}
-```
-
-```
-Sending: GET server_host/api/v4/group/2/subgroups?all_available=false&statistics=true
-header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
-Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
-```
-
-
-#### RESTler
-
-No Bug found
-
 
 ### gitlab commits
 
@@ -189,15 +162,46 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 ```
 
 **POST /projects/{id}/repository/commits**  
+1、Create a new project  
+2、Create a commit for the new project with special characters ":" in the branch parameter:
+
+```
+Sending: POST server_host/api/v4/projects?name=a
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:
+Received: 'HTTP/1.1 201 response : {"project_id": 2}
+```
+```
+Sending: POST server_host/api/v4/projects/{project_id}/repository/commits
+header: {'Content-Type': 'application/json',
+          'Authorization': 'Bearer token'}
+data:{"branch": "email:",
+      "commit_message": "suaxpicd7f",
+      "actions": [{"action": "create",
+                   "file_path": "8apwey0w5h", 
+                   "execute_filemode": "False"}]}
+Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
+```
+
+
 **POST /projects/{id}/repository/branches**
 
-#### EvoMaster
+1. create a project with an invalid "import_url"  
+2. post "main" branch in this project
 
-No BUG found
+for example
+```
+Sending: POST server_host/api/v4/projects?name=a
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
+data:{"import_url": "invalid import_url"}
+Received: 'HTTP/1.1 201 response : {"project_id": 2}
+```
+```
+Sending: POST server_host/api/v4/projects/{project_id}/repository/branches?branch=main&ref=main 
+data:
+Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
+```
 
-#### RESTler
-
-No BUG found
 
 ### WordPress
 
@@ -257,12 +261,4 @@ header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}
 data:  
 Received: 'HTTP/1.1 501 response : {"code":"rest_trash_not_supported"} 
 ```
-#### EvoMaster
-
-No BUG found
-
-#### RESTler
-
-No BUG found
-
 
