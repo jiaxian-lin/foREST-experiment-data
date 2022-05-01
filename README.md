@@ -1,33 +1,16 @@
 # foREST-experiment-data
-This is the companion repo for the paper **foREST: A Tree-based Approach for Fuzzing RESTful APIs** submitted to ISSTA 2022.
+This is the companion repo for the paper **foREST: A Tree-based Approach for Fuzzing RESTful APIs** submitted to ASE 2022.
 
 This repository is divided in two folders:
 1. `source code`:contains the tools described in the paper
 2. `experiment data`:contains the experiments data and how to reproduce the experiment
 
 A summary of the contents of this page is as follows:
-1. RESTler random-walk mode experiment: This part shows the actual situation of RESTler's random walk mode
-2. Summary of Bugs found by foREST: This part shows the summary of bugs found by foREST
-3. Bugs found in other APIs: This part shows the bugs found by foREST during testing
-4. Experiment bugs found: This part shows the bugs found by each tool during the experiment
-## RESTler randomwalk mode experiment
-<img src="https://user-images.githubusercontent.com/71680354/160048141-4fb2b6af-d44d-4ff0-b6c7-c597d41778c0.png" width = "500" height = "400" align=center />
-<img src="https://user-images.githubusercontent.com/71680354/160048216-5b284ba1-e2f8-4dec-b7da-dd1c9a5db918.png" width = "500" height = "400" align=center />
+1. Summary of Bugs found by foREST: This part shows the summary of bugs found by foREST
+2. Bugs found in other APIs: This part shows the bugs found by foREST during testing
+3. Experiment bugs found: This part shows the bugs found by each tool during the experiment
 
-## Bugs found in experiment by foREST
-| Project | Description|
-| --------- | -------- |
-| GitLab-project | POST /projects|
-| GitLab-project | POST /projects/{id}/fork/{forked_from_id}|
-| GitLab-project | POST /projects/{id}/share |
-| GitLab-group | POST /groups/{id}/hooks |
-| GitLab-group | DELETE /groups/{id} |
-| GitLab-commits | GET /projects/{id}/repository/commits |
-| GitLab-commits | POST /projects/{id}/repository/commits|
-| GitLab-commits | POST /projects/{id}/repository/branches|
-| WordPress | DELETE /tags/{id} |
-| WordPress | POST /users |
-| WordPress | DELETE /categories/{id} |
+
 ## Some reported bugs found by foREST
 
 this part list the Bugs we found by foREST 
@@ -39,7 +22,8 @@ this part list the Bugs we found by foREST
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | /clusters/{id}/metrics_dashboard/annotations/ POST |
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /users/{id}/custom_attributes/{key} DELETE/PUT/GET |
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /users/{id}/custom_attributes                  GET |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360138) | submitted | /projects/{id}/environments                    GET | 
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360662) |  confirm  | /projects/{project_id}/variables/{key}         GET |
+| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360138) |  confirm  | /projects/{id}/environments                    GET | 
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360147) | submitted | /projects/{id}/services/github               DELETE|
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | /projects/{id}/clusters/user                  POST |
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) | submitted | /projects/{id}/metrics/user_starred_dashboards POST|
@@ -76,13 +60,14 @@ We roughly divide the bugs we find into three categories
   6. POST /projects/{id}/clusters/user    
   7. GET /projects/{id}/repository/commits
   8. GET /projects/{id}/environments 
+  9. GET /projects/{id}/variables/{key}
 - logical flaw
   1. POST /projects/{id}/fork/{forked_from_id}
   2. POST /projects/{id}/repository/commits
   3. POST /projects/{id}/repository/branches
   4. DELETE /projects/{id}/services/github  
 ## Steps to reproduce some bugs
-### gitlab project
+We show the reproduction of some of the bugs, more detailed description and reproduction of the bugs can be viewed in the issue
 
 #### foREST
 
@@ -132,7 +117,6 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 
 ### gitlab commits
 
-#### foREST
 
 **GET /projects/{id}/repository/commits**
 
@@ -199,7 +183,6 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 
 the Bugs we found in WordPress caught by the server and returned the error reason
 
-#### foREST
 
 **DELETE /tags/{id}**
 1. create a tag
