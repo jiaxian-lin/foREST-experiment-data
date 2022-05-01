@@ -51,6 +51,7 @@ We roughly divide the bugs we find into three categories
   7. GET/DELETE/POST /projects/{id}/custom_attributes/{key}
   8. GET /users/{id}/custom_attributes 
   9. GET/DELETE/POST /users/{id}/custom_attributes/{key}
+  10. DELETE /projects/{id}/services/github  
 - The input data type does not match the actual required type
   1. POST /hooks
   2. POST /projects/{id}/metrics/user_starred_dashboards
@@ -61,11 +62,10 @@ We roughly divide the bugs we find into three categories
   7. GET /projects/{id}/repository/commits
   8. GET /projects/{id}/environments 
   9. GET /projects/{id}/variables/{key}
+  10. POST /projects/{id}/repository/commits
 - logical flaw
   1. POST /projects/{id}/fork/{forked_from_id}
-  2. POST /projects/{id}/repository/commits
-  3. POST /projects/{id}/repository/branches
-  4. DELETE /projects/{id}/services/github  
+  2. POST /projects/{id}/repository/branches
 ## Steps to reproduce some bugs
 We show the reproduction of some of the bugs, more detailed description and reproduction of the bugs can be viewed in the issue
 
