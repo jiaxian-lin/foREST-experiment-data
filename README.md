@@ -19,7 +19,6 @@ this part list the Bugs we found by foREST
 |---------|---------|---------|---------|
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) | submitted | /hooks                                        POST |
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) | submitted | /admin/clusters/add                           POST |
-| GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334610) | submitted | /clusters/{id}/metrics_dashboard/annotations/ POST |
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /users/{id}/custom_attributes/{key} DELETE/PUT/GET |
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /users/{id}/custom_attributes                  GET |
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360662) |  confirm  | /projects/{project_id}/variables/{key}         GET |
@@ -41,31 +40,28 @@ this part list the Bugs we found by foREST
 ## What are the characteristics of bugs found by foREST?
 We roughly divide the bugs we find into three categories
 
-- Function that are not supported by the system or have been removed (usually on locally deployed systems)
-  1. GET /groups/{id}/custom_attributes 
-  2. DELETE/PUT/GET /groups/{id}/custom_attributes/{key}
+-  better coverage
+  1. DELETE/PUT/GET /users/{id}/custom_attributes/{key}
+  2. GET /users/{id}/custom_attributes
   3. GET /projects/{id}/custom_attributes
-  4. GET /groups/{id}/custom_attributes
-  5. DELETE/PUT/GET /groups/{id}/custom_attributes/{key}
-  6. GET /projects/{id}/custom_attributes 
-  7. GET/DELETE/POST /projects/{id}/custom_attributes/{key}
-  8. GET /users/{id}/custom_attributes 
-  9. GET/DELETE/POST /users/{id}/custom_attributes/{key}
-  10. DELETE /projects/{id}/services/github  
-- The input data type does not match the actual required type
-  1. POST /hooks
-  2. POST /projects/{id}/metrics/user_starred_dashboards
-  3. POST /admin/clusters/add   
-  4. POST /projects/{id}/clusters/user  
-  5. POST /projects/{id}/export  
-  6. POST /projects/{id}/clusters/user    
-  7. GET /projects/{id}/repository/commits
-  8. GET /projects/{id}/environments 
-  9. GET /projects/{id}/variables/{key}
-  10. POST /projects/{id}/repository/commits
-- logical flaw
+  4. GET/DELETE/POST /projects/{id}/custom_attributes/{key}
+  5. DELETE /projects/{id}/services/github 
+  6. POST /projects/{id}/metrics/user_starred_dashboards
+  7. GET /groups/{id}/custom_attributes
+  8. DELETE/PUT/GET /groups/{id}/custom_attributes/{key}
+-  fuzzing matching
+  1. POST /hooks. (UTF-8)
+  2. POST /admin/clusters/add. (UTF-8)
+  3. POST /projects/{id}/clusters/user. (UTF-8)
+  4. POST /groups/{id}/clusters/user. (UTF-8)
+  5. POST /projects/{project_id}/variables/{key}. {invalid parameter}
+  6. GET /projects/{id}/environments. (invalid parameter)
+  7. POST /projects/{id}/metrics/user_starred_dashboards. (UTF-8)
+  8. GET /projects/{id}/repository/commits. (invalid parameter)
+  9. POST /projects/{id}/repository/commits. (invalid parameter)
+  10. POST /projects/{id}/repository/branches. (invalid parameter)
+-  resource pool
   1. POST /projects/{id}/fork/{forked_from_id}
-  2. POST /projects/{id}/repository/branches
 ## Steps to reproduce some bugs
 We show the reproduction of some of the bugs, more detailed description and reproduction of the bugs can be viewed in the issue
 
