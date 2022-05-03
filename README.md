@@ -37,31 +37,36 @@ this part list the Bugs we found by foREST
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /groups/{id}/custom_attributes                 GET |
 | GitLab | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) | submitted | /groups/{id}/custom_attributes/{key} DELETE/PUT/GET |
 
-## What are the characteristics of bugs found by foREST?
+## simple introduce of bugs
 We roughly divide the bugs we find into three categories
 
--  better coverage
-  1. DELETE/PUT/GET /users/{id}/custom_attributes/{key}
-  2. GET /users/{id}/custom_attributes
-  3. GET /projects/{id}/custom_attributes
-  4. GET/DELETE/POST /projects/{id}/custom_attributes/{key}
-  5. DELETE /projects/{id}/services/github 
-  6. POST /projects/{id}/metrics/user_starred_dashboards
-  7. GET /groups/{id}/custom_attributes
-  8. DELETE/PUT/GET /groups/{id}/custom_attributes/{key}
--  fuzzing matching
-  1. POST /hooks. (UTF-8)
-  2. POST /admin/clusters/add. (UTF-8)
-  3. POST /projects/{id}/clusters/user. (UTF-8)
-  4. POST /groups/{id}/clusters/user. (UTF-8)
-  5. POST /projects/{project_id}/variables/{key}. {invalid parameter}
-  6. GET /projects/{id}/environments. (invalid parameter)
-  7. POST /projects/{id}/metrics/user_starred_dashboards. (UTF-8)
-  8. GET /projects/{id}/repository/commits. (invalid parameter)
-  9. POST /projects/{id}/repository/commits. (invalid parameter)
-  10. POST /projects/{id}/repository/branches. (invalid parameter)
--  resource pool
-  1. POST /projects/{id}/fork/{forked_from_id}
+| foREST feature   | classification                    | Server    | Endpoint                                       | Method         | Reproduce                                                            | description                            |
+|------------------|-----------------------------------|-----------|------------------------------------------------|----------------|----------------------------------------------------------------------|----------------------------------------|
+| better coverage  | use after delete                  | GitLab    | /users/{id}/custom_attributes                  | GET            | create a user and delete it, then use this API                       | must be authenticated as administrator |
+| better coverage  | use after delete                  | GitLab    | /users/{id}/custom_attributes/{key}            | GET/PUT/DELETE | create a user and delete it, then use this API                       | must be authenticated as administrator |
+| better coverage  | use after delete                  | GitLab    | /projects/{id}/custom_attributes               | GET            | create a project and delete it, then use this API                    | must be authenticated as administrator |
+| better coverage  | use after delete                  | GitLab    | /projects/{id}/custom_attributes/{key}         | GET/PUT/DELETE | create a project and delete it, then use this API                    | must be authenticated as administrator |
+| better coverage  | use after delete                  | GitLab    | /groups/{id}/custom_attributes                 | GET            | create a group and delete it, then use this API                      | must be authenticated as administrator |
+| better coverage  | use after delete                  | GitLab    | /groups/{id}/custom_attributes                 | GET/PUT/DELETE | create a group and delete it, then use this API                      | must be authenticated as administrator |
+| better coverage  | function missing                  | WordPress | /categories/{id}                               | DELETE         | create a categories and delete it                                    |                                        |
+| better coverage  | function missing                  | WordPress | /tags/{id}                                     | DELETE         | create a categories and delete it                                    |                                        |
+| better coverage  | Manipulate non-existent resources | GitLab    | /projects/{id}/services/github                 | DELETE         | create a project without "github" service, then delete it's "github" |                                        |
+| better coverage  | logic flaw                        | WordPress | /tags/{id}                                     | DELETE         | double create a user with same "username"                            |                                        |
+| fuzzing matching | invalid parameter                 | GitLab    | /hooks                                         | POST           | invalid parameter "url"                                              | UTF-8                                  |
+| fuzzing matching | invalid parameter                 | GitLab    | /projects/{id}/metrics/user_starred_dashboards | POST           | invalid parameter "dashboard_path"                                   | UTF-8                                  |
+| fuzzing matching | invalid parameter                 | GitLab    | /admin/cluster/add                             | POST           | invalid paramter "platform_kubernetes_attributes[api_url]"           | UTF-8                                  |
+| fuzzing matching | invalid parameter                 | GitLab    | /projects/{id}/cluster/user                    | POST           | invalid paramter "platform_kubernetes_attributes[api_url]"           | UTF-8                                  |
+| fuzzing matching | invalid parameter                 | GitLab    | /groups/{id}/cluster/user                      | POST           | invalid paramter "platform_kubernetes_attributes[api_url]"           | UTF-8                                  |
+| fuzzing matching | invalid parameter                 | GitLab    | /projects/{id}/export                          | POST           | invalid parameter "upload[url]"                                      | UTF-8                                  |
+| fuzzing matching | invalid parameter                 | GitLab    | /projects/{project_id}/variables/{key}         | POST           | invalid parameter "filter"                                           |                                        |
+| fuzzing matching | invalid parameter                 | GitLab    | /projects/{id}/environments                    | GET            | invalid parameter "states"                                           |                                        |
+| fuzzing matching | invalid parameter                 | GitLab    | /projects/{id}/repository/commits              | GET            | invalid parameter "ref_name"                                         |                                        |
+| fuzzing matching | invalid parameter                 | GitLab    | /projects/{id}/repository/commits              | POST           | invalid parameter "branch"                                           |                                        |
+| fuzzing matching | logic flaw                        | GitLab    | /projects/{id}/repository/branches.            | POST           | create a project with invalid "import url", then create a branches   |                                        |
+| resource pool    | logic flaw                        | GitLab    | /projects/{id}/fork/{forked_from_id}           | POST           | for a project which has forked to this project                       |                                        |
+
+
+
 ## Steps to reproduce some bugs
 We show the reproduction of some of the bugs, more detailed description and reproduction of the bugs can be viewed in the issue
 
