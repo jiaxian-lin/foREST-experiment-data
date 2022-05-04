@@ -45,22 +45,18 @@ We show the reproduction of some of the bugs, more detailed description and repr
 
 **GET/DELETE/PUT /users/{id}/custom_attributes/{key}**
 1. create a user
-2. delete the user
-3. get the user's custom attributes
-
-for example:
-
 ```
 Sending: POST server_host/api/v4/users?user_name=a
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}      
-Received: 'HTTP/1.1 201 response:{"user_id"=2}
+Received: 'HTTP/1.1 201 response:{"user_id":2}
 ```
-
+2. delete the user
 ```
 Sending: DELETE server_host/api/v4/users
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}      
 Received: 'HTTP/1.1 202 response:{"message":"success"}
 ```
+3. get the user's custom attributes
 ```
 Sending: GET server_host/api/v4/users/{id}/custom_attributes 
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
@@ -83,20 +79,14 @@ similary with **GET /users/{id}/custom_attributes**
 
 
 
-
-
-
 **4.DELETE /projects/{id}/services/github**
 1. create a project 
-2. get the project commits with length of parameter 'ref_name' is too long and has special characters ':'
-
-for example:
 ```
 Sending: POST server_host/api/v4/projects?name=A
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
+2. delete the project's "github" services
 ```
 Sending: DELETE server_host/api/v4/projects/2/services/github
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
@@ -106,37 +96,33 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 
 
 **5. POST /hooks**
-1. create a hook with invalid "url" (UTF-8)
+create a hook with invalid "url" (UTF-8)
 ```
-Sending: POST server_host/api/v4/hooks?url=%e5   
+Sending: POST server_host/api/v4/hooks  
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data: 
+data: {"url": "%e5"} 
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
 
 **6. POST /projects/{id}/metrics/user_starred_dashboards**
 
 1. create a project A
-2. create a user starred dashboards with invalid "dashboard_path" (utf-8)
-
-for example:
 ```
 Sending: POST server_host/api/v4/projects?name=A
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
-
+2. create a user starred dashboards with invalid "dashboard_path" (utf-8)
 ```
 Sending: POST server_host/api/v4/projects/2/metrics/user_starred_dashboards
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
+data:  {"dashboard_path": "%e6%99%ba%e8%83%bd%e5"}
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
 
 **7. POST /admin/cluster/add**
 
-1. create a cluster with invalid "platform_kubernetes_attributes\[api_url\]"(UTF-8)
+create a cluster with invalid "platform_kubernetes_attributes\[api_url\]"(UTF-8)
 
 ```
 Sending: POST server_host/api/v4/admin/cluster/add
@@ -147,15 +133,13 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 
 **8. POST /projects/{id}/cluster/user**
 1. create a project
-2. create a cluster for a project  with invalid "platform_kubernetes_attributes\[api_url\]"(UTF-8)
-
 ```
 Sending: POST server_host/api/v4/projects?name=A
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
-
+2. create a cluster for a project  with invalid "platform_kubernetes_attributes\[api_url\]"(UTF-8)
 ```
 Sending: POST server_host/api/v4/projects/cluster/user
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
@@ -164,41 +148,33 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 ```
 
 **9. POST /groups/{id}/cluster/user**
-similary with 14. POST /projects/{id}/cluster/user
+similary with  **8. POST /projects/{id}/cluster/user**
 
 **10. POST /projects/{id}/export**
-similary with  14. POST /projects/{id}/cluster/user
+similary with  **8. POST /projects/{id}/cluster/user**
 
 **11. GET /projects/{id}/variables/{key}**
 1. create a project
-2. get a project variables with a invalid "filter"(special characters)
-
-
 ```
 Sending: POST server_host/api/v4/projects?name=A
-header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
+header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}    
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
-
+2. get a project variables with a invalid "filter"(special characters)
 ```
 Sending: GET server_host/api/v4/projects/2/variables/fuzzstring?fileter=1'
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
 
 **12. GET /projects/{id}/environments**
 1. create a project
-2. get a project environments with a invalid "states"(not enum)
-
 ```
 Sending: POST server_host/api/v4/projects?name=A
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
-
+2. get a project environments with a invalid "states"(not enum)
 ```
 Sending: GET server_host/api/v4/projects/2/environments?states=a
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
@@ -211,15 +187,13 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 **13. GET /projects/{id}/repository/commits**
 
 1. create a project 
-2. get the project commits with length of parameter 'ref_name' is too long and has special characters ':'
-
-for example:
 ```
 Sending: POST server_host/api/v4/projects?name=A
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
+2. get the project commits with length of parameter 'ref_name' is too long and has special characters
 ```
 Sending: GET server_host/api/v4/projects/2/repository/commits?ref_name=email:1@gmail.com
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
@@ -229,14 +203,12 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 
 **14. POST /projects/{id}/repository/commits**  
 1、Create a new project  
-2、Create a commit for the new project with special characters ":" in the branch parameter:
-
 ```
 Sending: POST server_host/api/v4/projects?name=a
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
+2、Create a commit for the new project with special characters ":" in the branch parameter:
 ```
 Sending: POST server_host/api/v4/projects/{project_id}/repository/commits
 header: {'Content-Type': 'application/json',
@@ -253,15 +225,13 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 **15. POST /projects/{id}/repository/branches**
 
 1. create a project with an invalid "import_url"  
-2. post "main" branch in this project
-
-for example
 ```
 Sending: POST server_host/api/v4/projects?name=a
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:{"import_url": "invalid import_url"}
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
+2. post "main" branch in this project
 ```
 Sending: POST server_host/api/v4/projects/{project_id}/repository/branches?branch=main&ref=main 
 data:
@@ -271,41 +241,35 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 **16.POST /projects/{id}/fork/{forked_from_id}** 
 
 1. create a project A 
-2. create a project B 
-3. project B fork project A
-4. project A fork project B  
-
-for example:
 ```
 Sending: POST server_host/api/v4/projects?name=A
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
+2. create a project B 
+
 ```
 Sending: POST server_host/api/v4/projects?name=B
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 3}
 ```
+3. project B fork project A
 ```
 Sending: POST server_host/api/v4/projects/2/fork/3 
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 201 response : {"message":"success"} 
 ```
+4. project A fork project B  
 ```
 Sending: POST server_host/api/v4/projects/3/fork/2
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
 
 
 **17. POST /projects**
-1. create a project with the optional parameter 'use_custom_template'
+create a project with the optional parameter 'use_custom_template'
 
-for example:
 ```
 Sending: POST server_host/api/v4/projects?name=Administrator   
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
@@ -314,15 +278,13 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 ```
 **18. DELETE /categories/{id}** 
 1. create a categories
-2. delete the categories
-
-for example:
 ```
 Sending: POST server_host/wp-json/wp/v2/categories
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  {'name': 'a'}
 Received: 'HTTP/1.1 201 response : {"id": 2}
 ```
+2. delete the categories
 ```
 Sending: DELETE server_host/wp-json/wp/v2/tags/2
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
@@ -331,15 +293,13 @@ Received: 'HTTP/1.1 501 response : {"code":"rest_trash_not_supported"}
 ```
 **19. DELETE /tags/{id}**
 1. create a tag
-2. delete the tag
-
-for example:
 ```
 Sending: POST server_host/wp-json/wp/v2/tags
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
 data:  {'name': 'a'}
 Received: 'HTTP/1.1 201 response : {"id": 2}
 ```
+2. delete the tag
 ```
 Sending: DELETE server_host/wp-json/wp/v2/tags/2
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
@@ -347,19 +307,20 @@ data:
 Received: 'HTTP/1.1 501 response : {"code":"rest_trash_not_supported"} 
 ```
 
-**20. POST /users** ------ use existed user email  
+**20. POST /users** ------ use existed user email or user name
 1. create a user A
+```
+Sending: POST /users server_host/wp-json/wp/v2/users 
+API_id: 35 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}
+data: {"username": "A", "name": "jqn6eec4uz", "email": "5@BS.yoM", "password": "string", "description": "string"}
+Received: 'HTTP/1.1 201 response : {"id":"1"}
+```
+
 2. create a user A again
 
 ```
 Sending: POST /users server_host/wp-json/wp/v2/users 
-API_id: 35 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjExMi4xOTQiLCJpYXQiOjE2NDI1NjQ2NTQsIm5iZiI6MTY0MjU2NDY1NCwiZXhwIjoxNjQzMTY5NDU0LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.MSGSpG7__uMcW_TQwMOrsgoNvUX4ouOqLIARBUoT3to'}
-data: {"username": "A", "name": "jqn6eec4uz", "email": "5@BS.yoM", "password": "string", "description": "string"}
-Received: 'HTTP/1.1 201 response : {"id":"1"}
-```
-```
-Sending: POST /users server_host/wp-json/wp/v2/users 
-API_id: 35 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjExMi4xOTQiLCJpYXQiOjE2NDI1NjQ2NTQsIm5iZiI6MTY0MjU2NDY1NCwiZXhwIjoxNjQzMTY5NDU0LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.MSGSpG7__uMcW_TQwMOrsgoNvUX4ouOqLIARBUoT3to'}
+API_id: 35 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}
 data: {"username": "A", "name": "jqn6eec4uz", "email": "5@BS.yoM", "password": "string", "description": "string"}
 Received: 'HTTP/1.1 500 response : {"code":"existing_user_login"}
 ```
