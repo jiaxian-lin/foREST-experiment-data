@@ -1,7 +1,7 @@
 # coding:utf-8
 import logging
-from logging.handlers import RotatingFileHandler # 按文件大小滚动备份
-import colorlog  # 控制台日志输入颜色
+from logging.handlers import RotatingFileHandler 
+import colorlog  
 import time
 import datetime
 import os
@@ -46,7 +46,7 @@ class Log:
             Log().warning('delete fail：{}'.format(e))
 
     def __console(self, level, message):
-        info_handle = RotatingFileHandler(filename=self.log_name, mode='a', encoding='utf-8')  # 使用RotatingFileHandler类，滚动备份日志
+        info_handle = RotatingFileHandler(filename=self.log_name, mode='a', encoding='utf-8')  
         info_handle.setLevel(logging.DEBUG)
         info_handle.setFormatter(self.formatter_file)
         creen_handle = colorlog.StreamHandler()
