@@ -10,7 +10,6 @@ class Parser:
     def __init__(self, path):
         with open(path, encoding='utf-8') as stream:
             yaml_data = yaml.safe_load(stream)
-        # 此处如果yaml文件有问题，会报错）
         self.json_data = jsonref.loads(json.dumps(yaml_data))
         self.api_list = []
         if self.json_data.get('swagger'):
