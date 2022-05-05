@@ -33,7 +33,7 @@ class Tool:
     def save_api_list(open_api_list):
         pattern = re.compile(r'([a-z]*)', re.I)
         file_name = pattern.match(Tool.read_config('api_file', 'file_path'))[0]
-        cur_path = os.path.dirname(os.path.realpath(__file__))  # log_path是存放日志的路径
+        cur_path = os.path.dirname(os.path.realpath(__file__)) 
         path = os.path.join(os.path.dirname(cur_path), './log/api_list')
         if not os.path.exists(path):
             os.mkdir(path)
@@ -46,7 +46,7 @@ class Tool:
     def save_resource_pool(resource_pool):
         pattern = re.compile(r'([a-z]*)', re.I)
         file_name = pattern.match(Tool.read_config('api_file', 'file_path'))[0]
-        cur_path = os.path.dirname(os.path.realpath(__file__))  # log_path是存放日志的路径
+        cur_path = os.path.dirname(os.path.realpath(__file__)) 
         path = os.path.join(os.path.dirname(cur_path), './log/resource')
         if not os.path.exists(path):
             os.mkdir(path)
@@ -56,7 +56,7 @@ class Tool:
                 f.write(jst)
     @staticmethod
     def save_no_reference(no_reference_key):
-        cur_path = os.path.dirname(os.path.realpath(__file__))  # log_path是存放日志的路径
+        cur_path = os.path.dirname(os.path.realpath(__file__)) 
         path = os.path.join(os.path.dirname(cur_path), './log/no_reference_key')
         file_name = 'no_reference_key'
         if not os.path.exists(path):
