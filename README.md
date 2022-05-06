@@ -90,7 +90,6 @@ Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
 Sending: DELETE server_host/api/v4/projects/2/services/github
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
 
@@ -136,7 +135,6 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 ```
 Sending: POST server_host/api/v4/projects?name=A
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
 2. create a cluster for a project  with invalid "platform_kubernetes_attributes\[api_url\]"(UTF-8)
@@ -178,7 +176,6 @@ Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
 Sending: GET server_host/api/v4/projects/2/environments?states=a
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
 
@@ -190,14 +187,12 @@ Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"}
 ```
 Sending: POST server_host/api/v4/projects?name=A
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 201 response : {"project_id": 2}
 ```
 2. get the project commits with length of parameter 'ref_name' is too long and has special characters
 ```
 Sending: GET server_host/api/v4/projects/2/repository/commits?ref_name=email:1@gmail.com
 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer token'}  
-data:  
 Received: 'HTTP/1.1 500 response : {"message":"500 Internal Server Error"} 
 ```
 
