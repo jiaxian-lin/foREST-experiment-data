@@ -1,6 +1,5 @@
 import requests
-from tool.tools import send_timeout
-from tool.tools import received_timeout
+from utils.foREST_setting import foRESTSetting
 
 
 class SendRequest:
@@ -10,7 +9,7 @@ class SendRequest:
         self.method = method
         self.base_header = header
         self.data = data
-        self.timeout = (int(send_timeout), int(received_timeout))
+        self.timeout = (10, 10)
         self.response = None
 
     @staticmethod
