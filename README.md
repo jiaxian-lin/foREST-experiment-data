@@ -1,9 +1,9 @@
 # foREST-experiment-data
 This is the companion repo for the paper **foREST: A Tree-based Approach for Fuzzing RESTful APIs** submitted to ASE 2022.
 
-
-`source code`:contains the tools described in the paper(Contains how to reproduce the experiments mentioned in the paper）
-
+This repository can be divided into two folders：
+1. `source code`:contains the tools described in the paper
+2. `experiment`: introduced how to reproduce our experiments
 
 A summary of the contents of this page is as follows:
 1. Summary of Bugs found by foREST: This part shows the summary of bugs found by foREST
