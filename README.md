@@ -1,44 +1,44 @@
 # foREST-experiment-data
 This is the companion repo for the paper **foREST: A Tree-based Approach for Fuzzing RESTful APIs** submitted to ASE 2022.
 
-This repository is divided in two folders:
-1. `source code`:contains the tools described in the paper
-2. `experiment data`:contains the experiments data and how to reproduce the experiment
+
+`source code`:contains the tools described in the paper(Contains how to reproduce the experiments mentioned in the paper）
+
 
 A summary of the contents of this page is as follows:
 1. Summary of Bugs found by foREST: This part shows the summary of bugs found by foREST
-2. Bugs found in other APIs: This part shows the bugs found by foREST during testing
-3. Experiment bugs found: This part shows the bugs found by each tool during the experiment
+2. Simpel introduction of bugs: This part shows the bugs found by foREST during testing
+3. Steps to reproduce the bugs: This part shows how to reproduce the bugs
 
 
 
-## simple introduce of bugs
+## simple introduction of bugs
 We roughly divide the bugs we find into three categories
 | id | classification                    | Server    | Endpoint                                                                | Method             | issue                                                         |
 |----|-----------------------------------|-----------|-------------------------------------------------------------------------|--------------------|---------------------------------------------------------------|
 | 1  | Logical: use after delete                  | GitLab    | /users/{id}/custom_attributes /users/{id}/custom_attributes/{key}       | GET GET/PUT/DELETE | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) |
 | 2  | Logical: use after delete                  | GitLab    | /projects/{id}/custom_attributes /projects/{id}/custom_attributes/{key} | GET GET/PUT/DELETE | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) |
 | 3  | Logical: use after delete                  | GitLab    | /groups/{id}/custom_attributes /groups/{id}/custom_attributes/{key}     | GET GET/PUT/DELETE | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) |
-| 4  | Logical: delete after delete | GitLab    | /projects/{id}/services/github                                          | DELETE             | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360147) |
+| 4  | Logical: double delete | GitLab    | /projects/{id}/services/github                                          | DELETE             | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360147) |
 | 5  | invalid parameter: UTF-8                | GitLab    | /hooks                                                                  | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) |
 | 6  | invalid parameter: UTF-8                 | GitLab    | /projects/{id}/metrics/user_starred_dashboards                          | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) |
 | 7  | invalid parameter: UTF-8                 | GitLab    | /admin/cluster/add                                                      | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
 | 8  | invalid parameter: UTF-8                | GitLab    | /projects/{id}/cluster/user                                             | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
-| 9  | invalid parameter                 | GitLab    | /groups/{id}/cluster/user                                               | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
-| 10 | invalid parameter                 | GitLab    | /projects/{id}/export                                                   | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
+| 9  | invalid parameter: UTF-8                | GitLab    | /groups/{id}/cluster/user                                               | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
+| 10 | invalid parameter: UTF-8                 | GitLab    | /projects/{id}/export                                                   | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
 | 11 | invalid parameter: special characters                 | GitLab    | /projects/{project_id}/variables/{key}                                  | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360662) |
-| 12 | invalid parameter: non enum                 | GitLab    | /projects/{id}/environments                                             | GET                | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360138) |
-| 13 | invalid parameter: long with special characters  | GitLab    | /projects/{id}/repository/commits                                       | GET                | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/356922) |
+| 12 | invalid parameter: enum type with bad value              | GitLab    | /projects/{id}/environments                                             | GET                | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360138) |
+| 13 | invalid parameter: long str with special char  | GitLab    | /projects/{id}/repository/commits                                       | GET                | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/356922) |
 | 14 | invalid parameter: special characters       | GitLab    | /projects/{id}/repository/commits                                       | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360312) |
-| 15 | logical: 2rd                        | GitLab    | /projects/{id}/repository/branches.                                     | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360313) |
+| 15 | logical: false logic                        | GitLab    | /projects/{id}/repository/branches.                                     | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/360313) |
 | 16 | logical: reference loop                        | GitLab    | /projects/{id}/fork/{forked_from_id}                                    | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/346563) |
 | 17 | unsuported function                   | GitLab    | /projects                                                               | POST               | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/356921) |
 | 18 | unsuported function                  | WordPress | /categories/{id}                                                        | DELETE             | unsubmitted                                                   |
 | 19 | unsuported function                  | WordPress | /tags/{id}                                                              | DELETE             | unsubmitted                                                   |
-| 20 | duplicated id                        | WordPress | /users                                                                  | DELETE             | unsubmitted                                                   |
+| 20 | logical: duplicated id                        | WordPress | /users                                                                  | DELETE             | unsubmitted                                                   |
 
 
-## Steps to reproduce some bugs
+## Steps to reproduce bugs
 We show the reproduction of some of the bugs, more detailed description and reproduction of the bugs can be viewed in the issue
 
 **1. GET /users/{id}/custom_attributes** 
@@ -324,4 +324,3 @@ API_id: 35 header:{'Content-Type': 'application/json', 'Authorization': 'Bearer 
 data: {"username": "A", "name": "jqn6eec4uz", "email": "5@BS.yoM", "password": "string", "description": "string"}
 Received: 'HTTP/1.1 500 response : {"code":"existing_user_login"}
 ```
-
