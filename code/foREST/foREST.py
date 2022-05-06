@@ -31,8 +31,7 @@ if __name__ == "__main__":
     foREST_monitor.reset_start_time()
     foREST_monitor.set_time_budget(foREST_setting.TESTING_TIME)
 
-    open_api_file_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '.\\openapi\\' +
-                                      foREST_setting.API_FILE_PATH)
+    open_api_file_path = foREST_setting.API_FILE_PATH
     open_api_parser = Parser(path=open_api_file_path)
     open_api_list = open_api_parser.get_api_list
     semantic_tree_root = Dependency(open_api_list)
