@@ -15,7 +15,7 @@ foREST will automatically infer the producer-consumer relationship between cloud
 
 1. Store the yaml document of the service to be tested in the openapi folder
 
-2. Configure in the [FoREST_config](https://github.com/jiaxian-lin/foREST-experiment-data/blob/main/code/foREST/FoREST_config.conf) according to actual needs
+2. Configure in the `FoREST_config.conf` according to actual needs
 
 3. Install the dependencies required to run foREST
 ```bash
