@@ -8,9 +8,6 @@ from entity.request import Request
 
 
 class ComposeRequest:
-    """
-        这个模块是用于生成请求的
-    """
 
     def __init__(self, api_info, node):
         self.api_info = api_info
@@ -27,11 +24,9 @@ class ComposeRequest:
         base_url_list.remove('')
         for path in base_url_list[::-1]:
             if not StringMatch.is_path_variable(path):
-                # 从后往前找到路径中的定值
                 self.current_parent_source = foREST_POST_resource_pool.find_resource_from_resource_name(path) # 在资源池中检索是否有该资源
                 if self.current_parent_source:
                     if self.current_parent_source.resource_api_id == self.api_info.api_id:
-                        # 排除掉自己做自己父资源的情况
                         self.current_parent_source = None
                         continue
                     self.get_path_parameter_from_parent_resource(self.request)
@@ -59,7 +54,6 @@ class ComposeRequest:
         #     if value:
         #         return
         if field_info.depend_list[0]:
-            # 判断该参数可否从其他请求的响应中获取
             genetic_algorithm = GeneticAlgorithm(field_info.depend_list[1])
             for i in range(len(field_info.depend_list[1])):
                 winner_depend_field_index = genetic_algorithm.get_winner_index()
@@ -80,7 +74,6 @@ class ComposeRequest:
                 genetic_algorithm.winner_failed()
             field_info.depend_list[1] = genetic_algorithm.get_survival_points_list
         if field_info.field_type == 'dict':
-            # 如果没有得到并且该参数是dict类型的话，将递归生成该参数
             value = {}
             if field_info.object:
                 for sub_field_info in field_info.object:
@@ -106,12 +99,10 @@ class ComposeRequest:
                     value.append(BasicFuzz.fuzz_value_from_type(field_info.array.field_type))
                 return value
         if value is None:
-            # 如果不能获得该参数的话，用fuzz
             value = BasicFuzz.fuzz_value_from_field(field_info)
         return value
 
     def compose_required_request(self):
-        # 组装必选参数
         if not self.api_info.req_param:
             return
         for field_info in self.api_info.req_param:
@@ -158,7 +149,6 @@ class ComposeRequest:
         return self.optional_request_pool
 
     def get_required_request(self):
-        # 返回生成的request
         self.compose_required_request()
         return self.request
 
