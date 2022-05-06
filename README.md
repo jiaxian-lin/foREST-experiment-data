@@ -14,6 +14,7 @@ A summary of the contents of this page is as follows:
 
 ## simple introduction of bugs
 We roughly divide the bugs we find into three categories
+
 | id | classification                    | Server    | Endpoint                                                                | Method             | issue                                                         |
 |----|-----------------------------------|-----------|-------------------------------------------------------------------------|--------------------|---------------------------------------------------------------|
 | 1  | Logical: use after delete                  | GitLab    | /users/{id}/custom_attributes /users/{id}/custom_attributes/{key}       | GET GET/PUT/DELETE | [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) |
